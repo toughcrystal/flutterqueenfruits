@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:queenfruits/Models/model.dart';
 
+
+
 class DetailProduct extends StatefulWidget {
   final AppModel products;
   const DetailProduct({super.key, required this.products});
@@ -38,6 +40,7 @@ class _DetailProductState extends State<DetailProduct> {
         children: [
           // Gambar Produk dengan PageView
           Container(
+            
             color: Colors.white,
             height: size.height * 0.46,
             width: size.width,
