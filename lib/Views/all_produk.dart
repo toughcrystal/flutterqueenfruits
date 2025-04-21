@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:queenfruits/Models/kategori_list.dart';
 import 'package:queenfruits/Models/model.dart';
 import 'package:queenfruits/Views/detail_produk.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 
 
