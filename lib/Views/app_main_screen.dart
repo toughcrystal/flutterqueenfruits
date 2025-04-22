@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queenfruits/Views/app_home_screen.dart';
-
+import 'package:queenfruits/Views/app_pesanan_screen.dart';
 
 
 class AppMainScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class _AppMainScreenState extends State<AppMainScreen> {
   int selectedIndex = 0;
   final List pages = [
     const AppHomeScreen(),
-    const Scaffold(), 
+    const AppPesananScreen(), 
     const Scaffold(),
     const Scaffold(),
   ];
@@ -29,9 +29,9 @@ class _AppMainScreenState extends State<AppMainScreen> {
         currentIndex: selectedIndex,
         onTap: (value) {
           setState(() {
-            
-          });
           selectedIndex = value;
+          });
+          
         },
         elevation: 0,
         backgroundColor: Colors.white,
