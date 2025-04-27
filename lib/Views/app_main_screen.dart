@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:queenfruits/Views/app_home_screen.dart';
+import 'package:queenfruits/Views/app_keranjang_screen.dart';
 import 'package:queenfruits/Views/app_pesanan_screen.dart';
 
 
@@ -15,7 +16,7 @@ class _AppMainScreenState extends State<AppMainScreen> {
   final List pages = [
     const AppHomeScreen(),
     const AppPesananScreen(), 
-    const Scaffold(),
+    const AppKeranjangScreen(),
     const Scaffold(),
   ];
   @override
