@@ -1,7 +1,58 @@
 import 'package:flutter/material.dart';
 
-class AppKeranjangScreen extends StatelessWidget {
+// Simulasi data produk dari menu detail
+class CartItem {
+  final String image;
+  final String title;
+  final int price;
+  int quantity;
+  bool isChecked;
+
+  CartItem({
+    required this.image,
+    required this.title,
+    required this.price,
+    this.quantity = 1,
+    this.isChecked = true,
+  });
+}
+
+class AppKeranjangScreen extends StatefulWidget {
   const AppKeranjangScreen({super.key});
+
+  @override
+  State<AppKeranjangScreen> createState() => _AppKeranjangScreenState();
+}
+
+class _AppKeranjangScreenState extends State<AppKeranjangScreen> {
+  List<CartItem> cartItems = [
+    CartItem(
+      image: 'assets/buah_mangga.jpg',
+      title: 'Mangga',
+      price: 32000,
+      quantity: 2,
+    ),
+    CartItem(
+      image: 'assets/buah olahan.jpg',
+      title: 'Salad Buah 200ml',
+      price: 50000,
+      quantity: 5,
+    ),
+  ];
+
+  int get totalHarga {
+    return cartItems
+        .where((item) => item.isChecked)
+        .map((item) => item.price * item.quantity)
+        .fold(0, (a, b) => a + b);
+  }
+
+  void _goToCheckout() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const CheckoutScreen()),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,41 +76,20 @@ class AppKeranjangScreen extends StatelessWidget {
                       color: Color(0xFF1B5953),
                     ),
                   ),
-                  SizedBox(width: 50),
+                  const SizedBox(width: 50),
                 ],
               ),
             ),
 
             // List Keranjang
             Expanded(
-              child: ListView(
+              child: ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  _buildCartItem(
-                    context,
-                    image: 'assets/buah_mangga.jpg',
-                    title: 'Mangga',
-                    price: 32000,
-                    quantity: 2,
-                    isChecked: true,
-                  ),
-                  _buildCartItem(
-                    context,
-                    image: 'assets/buah olahan.jpg',
-                    title: 'Salad Buah 200ml',
-                    price: 50000,
-                    quantity: 5,
-                    isChecked: true,
-                  ),
-                  // _buildCartItem(
-                  //   context,
-                  //   image: 'assets/buah naga.png',
-                  //   title: 'Buah Naga Potong',
-                  //   price: 28000,
-                  //   quantity: 1,
-                  //   isChecked: false,
-                  // ),
-                ],
+                itemCount: cartItems.length,
+                itemBuilder: (context, index) {
+                  final item = cartItems[index];
+                  return _buildCartItem(item);
+                },
               ),
             ),
 
@@ -76,17 +106,14 @@ class AppKeranjangScreen extends StatelessWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         'Total',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.grey,
-                        ),
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
                       ),
                       Text(
-                        'Rp. 82.000',
-                        style: TextStyle(
+                        'Rp. $totalHarga',
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF1B5953),
@@ -95,13 +122,14 @@ class AppKeranjangScreen extends StatelessWidget {
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: totalHarga > 0 ? _goToCheckout : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF1B5953),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
                     ),
                     child: const Text('Checkout'),
                   ),
@@ -114,12 +142,7 @@ class AppKeranjangScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCartItem(BuildContext context,
-      {required String image,
-      required String title,
-      required int price,
-      required int quantity,
-      required bool isChecked}) {
+  Widget _buildCartItem(CartItem item) {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(8),
@@ -130,14 +153,18 @@ class AppKeranjangScreen extends StatelessWidget {
       child: Row(
         children: [
           Checkbox(
-            value: isChecked,
-            onChanged: (value) {},
-            activeColor: Color(0xFF1B5953),
+            value: item.isChecked,
+            onChanged: (value) {
+              setState(() {
+                item.isChecked = value ?? false;
+              });
+            },
+            activeColor: const Color(0xFF1B5953),
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.asset(
-              image,
+              item.image,
               height: 50,
               width: 50,
               fit: BoxFit.cover,
@@ -148,29 +175,64 @@ class AppKeranjangScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Rp. ${price.toString()}',
-                  style: const TextStyle(color: Colors.grey),
-                ),
+                Text(item.title,
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.bold)),
+                Text('Rp. ${item.price}',
+                    style: const TextStyle(color: Colors.grey)),
               ],
             ),
           ),
           Row(
             children: [
-              const Icon(Icons.remove_circle_outline, color: Color(0xFF1B5953)),
-              const SizedBox(width: 4),
-              Text('$quantity'),
-              const SizedBox(width: 4),
-              const Icon(Icons.add_circle_outline, color: Color(0xFF1B5953)),
+              IconButton(
+                icon: const Icon(Icons.remove_circle_outline,
+                    color: Color(0xFF1B5953)),
+                onPressed: () {
+                  setState(() {
+                    if (item.quantity > 1) item.quantity--;
+                  });
+                },
+              ),
+              Text('${item.quantity}'),
+              IconButton(
+                icon: const Icon(Icons.add_circle_outline,
+                    color: Color(0xFF1B5953)),
+                onPressed: () {
+                  setState(() {
+                    item.quantity++;
+                  });
+                },
+              ),
             ],
           ),
-          const SizedBox(width: 8),
-          const Icon(Icons.delete_outline, color: Colors.grey),
+          IconButton(
+            icon: const Icon(Icons.delete_outline, color: Colors.grey),
+            onPressed: () {
+              setState(() {
+                cartItems.remove(item);
+              });
+            },
+          ),
         ],
+      ),
+    );
+  }
+}
+
+// Simulasi halaman Checkout
+class CheckoutScreen extends StatelessWidget {
+  const CheckoutScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Checkout"),
+        backgroundColor: const Color(0xFF1B5953),
+      ),
+      body: const Center(
+        child: Text("Halaman Checkout"),
       ),
     );
   }
