@@ -85,9 +85,9 @@ class LoginPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30),
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 16),
-                      textStyle: GoogleFonts.poppins(
+                        textStyle: const TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     child: const Text('Login'),
@@ -102,22 +102,25 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text(
                       "Belum punya akun? ",
-                      style: GoogleFonts.poppins(fontSize: 14),
+                      style: GoogleFonts.poppins(
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const RegisterPage()),
-                        );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const RegisterPage()),
+                      );
                       },
                       child: Text(
-                        "Daftar di sini",
-                        style: GoogleFonts.poppins(
-                          fontSize: 14,
-                          color: Colors.orange,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      "Daftar di sini",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.orange,
+                        fontWeight: FontWeight.bold,
+                      ),
                       ),
                     ),
                   ],
