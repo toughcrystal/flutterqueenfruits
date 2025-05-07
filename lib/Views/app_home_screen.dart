@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:queenfruits/Views/Widgets/banner.dart';
 import 'package:queenfruits/Models/model.dart';
 import 'package:queenfruits/Models/kategori_list.dart';
+import 'package:queenfruits/Views/all_kategori.dart';
 import 'package:queenfruits/Views/all_produk.dart';
 import 'Widgets/produk.dart';
 import 'package:queenfruits/Views/detail_produk.dart';
@@ -203,9 +204,14 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  IconButton(
+                    IconButton(
                     onPressed: () {
-                      print("See All ditekan");
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AllProduk(items: products, categories: Category(title: "Semua Produk", image: "assets/logo.jpg")),
+                      ),
+                      );
                     },
                     icon: const Icon(
                       CupertinoIcons.chevron_right,
@@ -214,10 +220,10 @@ class _AppHomeScreenState extends State<AppHomeScreen> {
                     ),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
+                    ),
+                  ],
                   ),
-                ],
-              ),
-            ),
+                ),
             // Produk List
             Padding(
               padding: const EdgeInsets.all(10),

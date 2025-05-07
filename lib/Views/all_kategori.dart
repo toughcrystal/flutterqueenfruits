@@ -3,85 +3,70 @@ import 'package:queenfruits/Models/kategori_list.dart';
 import 'package:queenfruits/Models/model.dart';
 import 'package:queenfruits/Views/detail_produk.dart';
 
-class AllProduk extends StatelessWidget {
-  final List<AppModel> items;
-  final Category categories;
 
-  const AllProduk({
+
+class Kategori extends StatelessWidget {
+  final Category categories;
+  final List<AppModel> items;
+
+  const Kategori({
     super.key,
-    required this.items,
     required this.categories,
-});
+    required this.items,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
-            // APPBAR KUSTOM
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
+            // Header
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
+                  InkWell(
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Icon(Icons.chevron_left, color: Color(0xFF1B5953)),
-                  ),
-                  Text(
-                    "Produk",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                    child: const Icon(
+                      Icons.arrow_back_ios_new,
                       color: Color(0xFF1B5953),
+                      size: 20,
                     ),
                   ),
-                  SizedBox(width: 50),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: SizedBox(
+                      height: 45,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.all(5),
+                          hintText: "${categories.title} QueenFruits",
+                          hintStyle: const TextStyle(
+                            color: Color(0xFF1B5953),
+                            fontSize: 16,
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          prefixIcon: const Icon(
+                            Icons.search,
+                            color: Color(0xFF1B5953),
+                          ),
+                          focusedBorder: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+                          border: const OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
-              ),
-            ),
-            // SEARCH BAR
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(30),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 5,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "Cari Produk",
-                    hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                    border: InputBorder.none,
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Icon(Icons.search, color: Color(0xFF1B5953)),
-                    ),
-                  ),
-                ),
               ),
             ),
             const SizedBox(height: 20),

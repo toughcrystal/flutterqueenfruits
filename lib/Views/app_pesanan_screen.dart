@@ -9,56 +9,66 @@ class AppPesananScreen extends StatefulWidget {
 
 class _AppPesananScreenState extends State<AppPesananScreen> {
   int _selectedTab = 0;
-  final List<String> _tabs = ['Konfirmasi', 'Proses', 'Dikirim'];
+  final List<String> _tabs = ['Konfirmasi', 'Proses', 'Dikirim', 'Selesai'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pesanan', style: TextStyle(color: Colors.teal)),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset('assets/logo.jpg'), 
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset("assets/logo.jpg", height: 50),
+              const Text(
+                "Pesanan",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B5953),
+                ),
+              ),
+              const SizedBox(width: 50),
+            ],
+          ),
         ),
-      ),
-      body: Column(
-        children: [
+        body: Column(
+          children: [
           // Tab Filter (Konfirmasi, Proses, Dikirim)
-          Padding(
+            Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(_tabs.length, (index) {
                 return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4),
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: _selectedTab == index ? Colors.orange : Colors.white,
-                      side: const BorderSide(color: Colors.orange),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _selectedTab = index;
-                      });
-                    },
-                    child: Text(
-                      _tabs[index],
-                      style: TextStyle(
-                        color: _selectedTab == index ? Colors.white : Colors.orange,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                  backgroundColor: _selectedTab == index ? Colors.orange : Colors.white,
+                  side: const BorderSide(color: Colors.orange),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
+                  ),
+                  onPressed: () {
+                  setState(() {
+                    _selectedTab = index;
+                  });
+                  },
+                  child: Text(
+                  _tabs[index],
+                  style: TextStyle(
+                    color: _selectedTab == index ? Colors.white : Colors.orange,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  ),
+                ),
                 );
               }),
+              ),
             ),
-          ),
+            ),
 
           // Card Pesanan
           Expanded(
@@ -85,7 +95,7 @@ class _AppPesananScreenState extends State<AppPesananScreen> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              'IDPSNB0001',
+                              '30 menit',
                               style: TextStyle(fontSize: 12, color: Colors.grey),
                             ),
                           ],

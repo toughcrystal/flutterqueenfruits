@@ -35,8 +35,9 @@ class _DetailProductState extends State<DetailProduct> {
         ),
         iconTheme: const IconThemeData(color: Color(0xFF1B5953)),
       ),
-      body: 
+      body: SafeArea(child:
       ListView(
+        padding: const EdgeInsets.only(bottom: 80), // supaya tidak tertutup tombol bawah
         children: [
           // Gambar Produk dengan PageView
           Container(
@@ -236,14 +237,14 @@ class _DetailProductState extends State<DetailProduct> {
                         });
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1B5953),
-                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(3),
                         ),
                         child: const Icon(
                           Icons.remove,
-                          color: Colors.white,
+                          color: const Color(0xFF1B5953),
                         ),
                       ),
                     ),
@@ -252,12 +253,12 @@ class _DetailProductState extends State<DetailProduct> {
                     Text(
                       "$productCount",
                       style: const TextStyle(
-                        fontSize: 12,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 5),
                     // Tombol Tambah
                     GestureDetector(
                       onTap: () {
@@ -266,14 +267,14 @@ class _DetailProductState extends State<DetailProduct> {
                         });
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1B5953),
-                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(3),
                         ),
                         child: const Icon(
                           Icons.add,
-                          color: Colors.white,
+                          color: const Color(0xFF1B5953),
                         ),
                       ),
                     ),
@@ -284,69 +285,52 @@ class _DetailProductState extends State<DetailProduct> {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF1B5953),
         elevation: 0,
-        label: SizedBox(
-          width: size.width * 0.9,
-          child: Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: const Color(0xFF1B5953),
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(Icons.shopping_cart_outlined,
-                          color: Color(0xFF1B5953)),
-                      SizedBox(width: 5),
-                      Text(
-                        "Tambah ke Keranjang",
-                        style: TextStyle(
-                          color: Color(0xFF1B5953),
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: -1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+        label: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Icon(Icons.shopping_cart_outlined, color: Colors.white),
+            SizedBox(width: 5),
+            Text(
+              "Tambah ke Keranjang",
+              style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
               ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2,
-                      color: const Color(0xFF1B5953),
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color(0xFF1B5953),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Beli Sekarang",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
+              // const SizedBox(width: 10),
+              // Expanded(
+              //   child: Container(
+              //     padding: const EdgeInsets.symmetric(vertical: 15),
+              //     decoration: BoxDecoration(
+              //       border: Border.all(
+              //         width: 2,
+              //         color: const Color(0xFF1B5953),
+              //       ),
+              //       borderRadius: BorderRadius.circular(10),
+              //       color: const Color(0xFF1B5953),
+              //     ),
+              //     child: const Center(
+              //       child: Text(
+              //         "Beli Sekarang",
+              //         style: TextStyle(
+              //           color: Colors.white,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+            
+          
+        
       ),
     );
   }

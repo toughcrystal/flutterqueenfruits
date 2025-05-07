@@ -261,12 +261,22 @@ class _AppSettingsScreenState extends State<AppSettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            const Text('Pengaturan Akun', style: TextStyle(color: Colors.teal)),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
+        title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset("assets/logo.jpg", height: 50),
+              const Text(
+                "Pengaturan",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1B5953),
+                ),
+              ),
+              const SizedBox(width: 50),
+            ],
+          ),
+        ),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:queenfruits/Views/app_home_screen.dart';
 import 'package:queenfruits/Views/app_pesanan_screen.dart';
 import 'package:queenfruits/Views/app_settings_screen.dart';
+import 'package:queenfruits/Views/app_keranjang_screen.dart';
 
 class AppMainScreen extends StatefulWidget {
   const AppMainScreen({super.key});

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:queenfruits/Views/app_checkout_screen.dart';
 
 // Simulasi data produk dari menu detail
 class CartItem {
@@ -121,18 +122,34 @@ class _AppKeranjangScreenState extends State<AppKeranjangScreen> {
                       ),
                     ],
                   ),
-                  ElevatedButton(
-                    onPressed: totalHarga > 0 ? _goToCheckout : null,
+                    ElevatedButton(
+                    onPressed: totalHarga > 0
+                      ? () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                          builder: (context) => const CheckoutScreen(),
+                          ),
+                        );
+                        }
+                      : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF1B5953),
+                      backgroundColor: const Color(0xFF1B5953),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20),
                       ),
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 12),
+                        horizontal: 32, vertical: 12),
                     ),
-                    child: const Text('Checkout'),
-                  ),
+                    child: const Text(
+                      'Checkout',
+                      style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      ),
+                    ),
+                    ),
                 ],
               ),
             ),
@@ -221,19 +238,19 @@ class _AppKeranjangScreenState extends State<AppKeranjangScreen> {
 }
 
 // Simulasi halaman Checkout
-class CheckoutScreen extends StatelessWidget {
-  const CheckoutScreen({super.key});
+// class CheckoutScreen extends StatelessWidget {
+//   const CheckoutScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Checkout"),
-        backgroundColor: const Color(0xFF1B5953),
-      ),
-      body: const Center(
-        child: Text("Halaman Checkout"),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("Checkout"),
+//         backgroundColor: const Color(0xFF1B5953),
+//       ),
+//       body: const Center(
+//         child: Text("Halaman Checkout"),
+//       ),
+//     );
+//   }
+// }
